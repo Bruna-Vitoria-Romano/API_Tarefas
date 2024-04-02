@@ -5,3 +5,4 @@
 - Conexão com banco de dados
 - CRUD
 - Trabalhar implementação e boas práticas
+- Melhorar práticas de commits
