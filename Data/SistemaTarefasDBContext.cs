@@ -1,4 +1,5 @@
-﻿using API_Tarefas.Models;
+﻿using API_Tarefas.Data.Map;
+using API_Tarefas.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace API_Tarefas.Data
@@ -14,6 +15,10 @@ namespace API_Tarefas.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.ApplyConfiguration(new UsuarioMap());
+            modelBuilder.ApplyConfiguration(new TarefaMap());
+            // vai aplicar o mapeamento das propriedades
+
             base.OnModelCreating(modelBuilder);
         }
     }

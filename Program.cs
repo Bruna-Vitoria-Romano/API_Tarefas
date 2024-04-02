@@ -1,4 +1,9 @@
 
+using API_Tarefas.Data;
+using API_Tarefas.Repositorios;
+using API_Tarefas.Repositorios.Interfaces;
+using Microsoft.EntityFrameworkCore;
+
 namespace API_Tarefas
 {
     public class Program
@@ -7,12 +12,22 @@ namespace API_Tarefas
         {
             var builder = WebApplication.CreateBuilder(args);
 
+
             // Add services to the container.
 
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+
+            builder.Services.AddEntityFrameworkSqlServer()
+                .AddDbContext<SistemaTarefasDBContext>(
+                    options => options.UseSqlServer(builder.Configuration.GetConnectionString("DataBase"))
+                );
+
+            builder.Services.AddScoped<IUsuarioRepositorio, UsuarioRepositorio>();
+            // AddScoped cria uma nova instância para cada escopo (cada solicitação é um escopo)
+            // e dentro do escopo ele reutiliza o serviço existente.
 
             var app = builder.Build();
 
